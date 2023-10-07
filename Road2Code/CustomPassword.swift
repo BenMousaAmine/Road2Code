@@ -10,6 +10,7 @@ import SwiftUI
 struct CustomPassword: View {
         @Binding var password: String
         @Binding var isPasswordVisible: Bool
+        @State   var placeholder : String = ""
 
         var body: some View {
             HStack {
@@ -35,9 +36,9 @@ struct CustomPassword: View {
                     .foregroundColor(.gray)
 
                 if isPasswordVisible {
-                    TextField("Password", text: $password)
+                    TextField(placeholder, text: $password)
                 } else {
-                    SecureField("Password", text: $password)
+                    SecureField(placeholder, text: $password)
                 }
 
                 Button(action: {
