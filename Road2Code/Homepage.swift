@@ -7,44 +7,68 @@
 
 import SwiftUI
 
-struct Homepage: View {
-    let colorPerso = Color(
-        red: 61 / 255.0 ,
-        green:   59 / 255.0 ,
-        blue: 142 / 255.0 )
+struct LanguageButtonView: View {
+    let language: String
+
     var body: some View {
-        VStack {
-            VStack(alignment: .leading) {
+        HStack {
+            Image(language)
+                .resizable()
+                .frame(width: 130, height: 80, alignment: .bottom)
+            Text(language)
+                .padding(10)
+                .fontWeight(.bold)
+                .foregroundColor(Color.CustomColor)
+        }
+    }
+}
+struct Homepage: View {
+    @Binding var nickname: String
+    @State private var selectedLanguage: String?
+    let languages = ["Java", "JavaScript", "Python", "React", "Database", "HTML:CSS"]
+
+    var body: some View {
+        NavigationView {
+            VStack {
                 Image("Road2Code")
-                    .resizable().frame(width: 50, height: 50)
+                    .resizable()
+                    .frame(width: 50, height: 50, alignment: .leading)
                     .cornerRadius(10)
+                Text("Ciao " + nickname)
+                    .font(.system(size: 36))
+                    .bold()
+                    .foregroundColor(Color.CustomColor)
+                Spacer().frame(height: 20)
+                Text("Completa i seguenti quiz e ")
+                    .font(.system(size: 18))
+                    .bold()
+                    .padding(7)
+                Text("Ottieni la tua roadmap")
+                    .foregroundColor(Color.CustomColor)
+                    .bold()
+                    .font(.system(size: 26))
+                Spacer()
+                VStack {
+                    ForEach(languages, id: \.self) { language in
+                        NavigationLink(destination: QuizStart(language: language), tag: language, selection: $selectedLanguage) {
+                                LanguageButtonView(language: language)
+                            }
+                        .buttonStyle(PlainButtonStyle())
+                        .onTapGesture {
+                            selectedLanguage = language
+                        }
+                    }
+                }
             }
-            Text("Ciao Nickname")
-                .font(.system(size: 36))
-                .bold()
-                .foregroundColor(colorPerso)
-            Spacer()
-            Text("Completa i seguenti quiz e ")
-                .font(.system(size: 18))
-                .bold()
-                .padding(7)
-            Text("Ottieni la tua roadmap")
-                .foregroundColor(colorPerso)
-                .bold()
-                .font(.system(size: 26))
-            Spacer()
-            HStack {
-                Text("Java")
-                Text("JavaScript")
-            }
-            Tab()
-                
+         
         }
     }
 }
 
+
 struct Homepage_Previews: PreviewProvider {
+    @State static var sampleNickname: String = "Prova"
     static var previews: some View {
-        Homepage()
+        Homepage(nickname: $sampleNickname)
     }
 }
