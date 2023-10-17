@@ -46,8 +46,8 @@ struct ContentView: View {
                             .foregroundColor(colorPerso)
                             .border(colorPerso , width: 3)
                             .cornerRadius(7)
-                    }
-                }
+                }.navigationBarBackButtonHidden(true)
+            }
                 .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             }
             
