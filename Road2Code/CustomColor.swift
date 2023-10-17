@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Color {
-   static let CostumColor = Color (
+   static let CustomColor = Color (
         red: 61 / 255.0 ,
         green:   59 / 255.0 ,
         blue: 142 / 255.0 )
