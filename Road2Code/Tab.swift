@@ -9,34 +9,43 @@ import SwiftUI
 
 struct Tab: View {
     @State private var tabViewSelection = 1
+    @Binding var nickname: String
+    let uiCustomColor = UIColor(
+        red: 61 / 255.0 ,
+        green:   59 / 255.0 ,
+        blue: 142 / 255.0, alpha: 1.0
+    )
+    
     var body: some View {
         TabView(selection: $tabViewSelection) {
             Badges()
             .tabItem {
                 Image(systemName: "app.badge")
-                    .foregroundColor(Color.white)
-                    .frame(width: 395, height: 80)
             }.tag(0)
-            Homepage()
+            Homepage(nickname: $nickname)
+                .padding()
                 .tabItem {
                 Image(systemName: "house.fill")
-                        .foregroundColor(Color(.secondaryLabel))
-                    .frame(width: 395, height: 80)
             }.tag(1)
-            Profile()
+            Profile(nickname: $nickname)
             .tabItem {
                 Image(systemName: "person.fill")
-                    .foregroundColor(Color.white)
-                    .frame(width: 395, height: 80)
             }.tag(2)
-        }.onAppear() {
-            UITabBar.appearance().backgroundColor = .white
+        }
+        .accentColor(Color.black)
+        .onAppear() {
+            UITabBar.appearance().backgroundColor = uiCustomColor
+            UITabBar.appearance().unselectedItemTintColor = UIColor.white
+         
             }
+        .navigationBarBackButtonHidden(true)
+        
     }
 }
 
 struct Tab_Previews: PreviewProvider {
+    @State static var sampleNickname: String = "Prova"
     static var previews: some View {
-        Tab()
+        Tab(nickname: $sampleNickname)
     }
 }
