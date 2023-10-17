@@ -44,14 +44,14 @@ struct CustomPassword: View {
                 Button(action: {
                     isPasswordVisible.toggle()
                 }) {
-                    Image(systemName: isPasswordVisible ? "eye" : "eye.slash")
+                    Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
                         .foregroundColor(.gray)
                 }
             }
             .padding()
             .background(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.CostumColor, lineWidth: 1)
+                    .stroke(Color.CustomColor, lineWidth: 1)
             )
             .padding(.horizontal)
         }
