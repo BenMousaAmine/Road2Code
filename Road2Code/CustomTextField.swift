@@ -31,14 +31,14 @@ struct CustomTextField : View {
         HStack {
             Image(systemName: imageName)
                 .resizable()
-                .frame(width: 24, height: 24)
+                .frame(width: 22, height: 24)
                 .foregroundColor(.gray)
             TextField(placeholder, text: $text)
         }
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.CostumColor, lineWidth: 1)
+                .stroke(Color.CustomColor, lineWidth: 1)
         )
         .padding(.horizontal)
     }
